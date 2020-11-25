@@ -1,0 +1,30 @@
+credit=read.csv("Credit.csv", header=T, sep=",")
+attach(credit)
+names(credit)
+plot (Income, Limit)
+plot(Student, Limit)
+plot(Education, Limit)
+mod1=lm(Limit~Income)
+summary (mod1) 
+mod2=lm(Limit~Balance)
+summary(mod2)
+mod3=lm(Limit~Income+Balance)
+summary (mod3)
+install.packages("lmtest")
+require(lmtest)
+dwtest(mod1)
+bgtest(mod1,2) 
+bgtest(mod1,3) 
+bgtest(mod1,4)
+bptest(mod1)
+resettest (mod1)
+
+#тестуємо модель 3 на наявність гетероскедастичності, автокореляції
+#правильної специфікації, нормальності розподілу, мультиколінеарності
+
+
+bptest(mod3)
+bgtest(mod3,2)
+bgtest(mod3,3)
+bgtest(mod3,1)
+dwtest(mod3)
